@@ -1,5 +1,5 @@
-local Config = require 'config'
-local Utils = require 'modules.server.utils'
+local Config <const> = require 'config'
+local Utils <const> = require 'modules.server.utils'
 
 lib.versionCheck('acscripts/ac_radio')
 
@@ -21,4 +21,13 @@ Citizen.SetTimeout(0, function()
     end
 
     require 'modules.server.framework.aceperms'
+end)
+
+---@param state boolean
+RegisterNetEvent('ac_radio:setRadioProp', function(state)
+    local playerId = source
+
+    if type(state) ~= 'boolean' then return end
+
+    Player(playerId).state:set('ac:hasRadioProp', state, true)
 end)
